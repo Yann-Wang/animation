@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.d2{
+			display: block;
+			width: 100px;
+			height: 100px;
+			background-color: red;
+			transition: margin-left 2s ease-in;
+		}
+		.d22{
+			margin-left:600px;
+			/*transition: margin-left 6s ease-out;*/
+		}
+		.d3{
+			display: block;
+			width: 100px;
+			height: 100px;
+			background-color: red;
+			transition: margin-left 6s step(3,end);
+		}
+		.d3:hover{
+			margin-left:600px;
+		}
+	</style>
+</head>
+<body>
+	<div class="d1">
+		<a class="d2" href="#">xx</a>
+		<!-- <a class="d3" href="#">xx</a> -->
+	</div>
+	<button id="btn">btn</button>
+	<script>
+		var btn = document.getElementById("btn");
+		var target = document.getElementsByClassName("d2")[0];
+		
+		function fn(cn){
+			this.className += " " + cn;
+		}
+		function cb(tg,cname){
+			return function(){
+				fn.apply(tg,[cname]);
+			}
+		}
+		var toRight = cb(target,"d22");
+		btn.addEventListener('click',toRight,false);
+	</script>
+	
+</body>
+</html>

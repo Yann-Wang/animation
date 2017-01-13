@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <title>Title</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Turn a square into a circle */
+        #ball {
+            background: red;
+            height: 100px;
+            width: 100px;
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            border-radius: 50px;
+            background-image: -webkit-radial-gradient(30px 30px, ellipse cover, #ffe0dd 1%, #ff3019 5%, #d60404 54%, #4f0101 100%);
+            background-image: -moz-radial-gradient(30px 30px, ellipse cover, #ffe0dd 1%, #ff3019 5%, #d60404 54%, #4f0101 100%);
+            background-image: -o-radial-gradient(30px 30px, ellipse cover, #ffe0dd 1%, #ff3019 5%, #d60404 54%, #4f0101 100%);
+            background-image: radial-gradient(30px 30px, ellipse cover, #ffe0dd 1%, #ff3019 5%, #d60404 54%, #4f0101 100%);
+        }
+
+        #floor {
+            position: absolute;
+            bottom: 10px;
+            left: 0px;
+            width: 350px;
+            height: 1px;
+            border-top: 5px solid brown;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="ball">
+
+    </div>
+    <div id="floor">
+
+    </div>
+    <script>
+        (function(){
+
+            var down = false;
+
+            var TRANSITION     = 'transition',
+                    TRANSFORM      = 'transform',
+                    TRANSITION_END = 'transitionend',
+                    TRANSFORM_CSS  = 'transform',
+                    TRANSITION_CSS = 'transition';
+
+            if(typeof document.body.style.webkitTransform !== undefined) {
+                TRANSITION = 'webkitTransition';
+                TRANSFORM = 'webkitTransform';
+                TRANSITION_END = 'webkitTransitionEnd';
+                TRANSFORM_CSS = '-webkit-transform';
+                TRANSITION_CSS = '-webkit-transition';
+            }
+
+            var ball = document.getElementById('ball'),
+                    floor = document.getElementById('floor');
+
+            function bounce() {
+                if(down) {
+                    ball.style[TRANSITION] = "top 1s cubic-bezier(0, .27, .32, 1)";
+                    ball.style.top = '10px';
+                    down = false;
+                } else {
+                    ball.style[TRANSITION] = "top 1s cubic-bezier(1, 0, 0.96, 0.91)";
+                    //readonly long offsetLeft,offsetTop   当前元素的css边框的左上角
+                    // 相对于它的offsetParent容器元素的X及Y坐标。
+                    //readonly Element    offsetParent     指定容器元素，
+                    // offsetLeft和offsetTop将基于这个容器元素定义的坐标系统度量。
+                    // 对大多数元素来说，offsetParent是包含它们的<body>元素。
+                    // 不过，如果一个元素在一个动态定位的元素中，那个定位的元素将是offsetParent，
+                    // 如果元素在表格中，<td>,<th>,<table>元素可能会是offsetParent。
+
+
+                    ball.style.top = (floor.offsetTop - 100) + 'px';
+                    down = true;
+                }
+            }
+
+            ball.addEventListener(TRANSITION_END, bounce);
+            bounce();
+
+        })();
+    </script>
+</body>
+</html>

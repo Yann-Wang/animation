@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Turn a square into a circle */
+        #ball {
+            background: red;
+            height: 100px;
+            width: 100px;
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            border-radius: 50px;
+            background-image: -webkit-radial-gradient(30px 30px, ellipse cover, #ffe0dd 1%, #ff3019 5%, #d60404 54%, #4f0101 100%);
+            background-image: -moz-radial-gradient(30px 30px, ellipse cover, #ffe0dd 1%, #ff3019 5%, #d60404 54%, #4f0101 100%);
+            background-image: -o-radial-gradient(30px 30px, ellipse cover, #ffe0dd 1%, #ff3019 5%, #d60404 54%, #4f0101 100%);
+            background-image: radial-gradient(30px 30px, ellipse cover, #ffe0dd 1%, #ff3019 5%, #d60404 54%, #4f0101 100%);
+        }
+
+        #floor {
+            position: absolute;
+            bottom: 10px;
+            left: 0px;
+            width: 350px;
+            height: 1px;
+            border-top: 5px solid brown;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="ball">
+
+    </div>
+    <h3>一个更新、更强大的JavaScript动画工具：requestAnimationFrame(请求动画帧)</h3>
+    <p>优点：requestAnimationFrame只需要一个回调函数作为参数。
+        回调函数会在下一次浏览器重绘之后触发执行，
+        这能让浏览器自行优化包括帧速率在内的某些东西，以提高性能。
+        另外，通过在更新UI时一同更新，CPU负载远低于setTimeout。
+    </p>
+    <p>缺点：请求动画帧带前缀，不能在Android浏览器上工作</p>
+
+
+    <div id="floor">
+    <script src="./animation.js"></script>
+    <script>
+
+        var ball = document.querySelector("#ball");
+        var floor = document.querySelector("#floor");
+        //move the ball 100 pixels in 5 seconds
+        animate(ball, 0, floor.offsetTop-100, 2000, function(){
+            console.log('done!');
+        });
+    </script>
+</div>
+</body>
+</html>

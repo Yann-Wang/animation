@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width">
+    <title>Scrubbing Transforms</title>
+    <style type="text/css">
+        body{
+            transform-style: preserve-3d;
+        }
+        #zoomer {
+            font-size: 24px;
+            position: absolute;
+            top:50px;
+            left:100px;
+            background: green;
+            -webkit-transition: -webkit-transform .2s ease-in-out;
+            transition: transform .5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="zoomer">Drink me!</h1>
+    <ul>优化动画方法：
+        <li>用css变换替代使用绝对定位</li>
+        <li>通过translate3d,scale3d,rotate3d,matrix3d来使用硬件加速</li>
+    </ul>
+    <p>3D变换总是在GPU上渲染，经过硬件加速的变换是目前最快的动画。</p>
+    <p>由于2D变换不需要渲染图像，浏览器能够以较大的尺寸重新渲染文本。</p>
+    <p>3D变换导致了文字的模糊。GPU只有图像可供操作，所以它只能按比例放大图像，从而得到一个模糊的版本。要解决这个限制，一旦动作完成，可以将3D变换转换为2D变化。</p>
+    <p>净化变换还有一个好处：释放GPU占用的内存。</p>
+</body>
+<script type="text/javascript" charset="utf-8">
+    (function(){
+
+        var TRANSFORM_PROPERTY =
+                (typeof document.body.style.webkitTransform ==='string') ?
+                        'webkitTransform' : 'transform';
+
+        var TRANSFORM_END =
+                (typeof document.body.style.webkitTransform ==='string') ?
+                        'webkitTransformEnd' : 'transformend';
+
+
+        function embiggen(element) {
+            element.addEventListener(TRANSFORM_END, function(e) {
+                element.style[TRANSFORM_PROPERTY] = 'scale(2)';
+            })
+            element.style[TRANSFORM_PROPERTY] = 'scale3d(2,2,2)';
+        }
+
+        var z = document.getElementById('zoomer');
+
+        z.addEventListener('click', function(e) {
+            embiggen(z);
+        })
+
+    })();
+</script>
+</html>

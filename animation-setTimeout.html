@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <title>用setTimeout实现动画</title>
+    <style>
+        .picture{
+            opacity:0.1;
+        }
+    </style>
+</head>
+<body>
+    <h1>用setTimeout实现动画</h1>
+    <p>这种做法可能会导致动画抖动。</p>
+    <p>在所有的浏览器中，JavaScript是单线程执行的：
+        在某一时刻只有一条代码语句可以执行。
+        异步任务，比如事件定时器，会加入到执行队列，然后在线程变得空闲时执行。
+        在上面的示例中，如果浏览器正忙，在变得空闲之前，下一帧的动画不会被绘制，
+        造成了动画中的明显抖动。</p>
+    <div>
+        <img class="picture" src="./1.jpg" alt="">
+    </div>
+    <p>obj.style.opacity默认值为"",读取的是内联样式，</p>
+    <p>css中设置的opacity属性值，属于样式表样式，读取方法document.styleSheets[0].cssRules[0].style.opacity</p>
+
+    <script>
+        var h = document.querySelector(".picture");
+        var styleSheetOpacity = document.styleSheets[0].cssRules[0].style.opacity;
+        var opacity = parseFloat(styleSheetOpacity);
+
+        console.log(typeof styleSheetOpacity, opacity);
+
+        function fadeIn() {
+
+            if(opacity<1){
+                opacity = opacity + 0.1;
+                h.style.opacity = opacity;
+                window.setTimeout(fadeIn,33);
+            }
+        }
+
+        fadeIn();
+    </script>
+
+</body>
+</html>

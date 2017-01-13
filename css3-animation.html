@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		@keyframes wobble{
+			0% {
+				margin-left:10px;
+				background-color: green;
+
+			}
+			40%{
+				margin-left:150px;
+				background-color: orange;
+			}
+			60%{
+				margin-left:175px;
+				background-color: blue;
+			}
+			100%{
+				margin-left:200px;
+				background-color: red;
+			}
+		}	
+		@-webkit-keyframes wobble{
+			0% {
+				margin-left:100px;
+				background-color: green;
+
+			}
+			40%{
+				margin-left:150px;
+				background-color: orange;
+			}
+			60%{
+				margin-left:175px;
+				background-color: blue;
+			}
+			100%{
+				margin-left:200px;
+				background-color: red;
+			}
+		}
+		.dd{
+			width:100px;
+			height: 100px;
+			background-color: red;
+			-webkit-animation: wobble 2s steps(5,end) both;
+			/*animation: wobble 2s steps(5,end) forwards;*/
+			animation: wobble 2s ease-in-out forwards;
+
+		}
+	</style>
+</head>
+<body>
+	<p style="margin-left:50px;">animation: [name duration timing-function delay iteration-count direction play-state fill-mode]*</p>
+	<div>
+		<div class="dd"></div>
+	</div>
+	
+</body>
+</html>

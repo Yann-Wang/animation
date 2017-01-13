@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <style>
+        .picture {
+            -webkit-transition: opacity 0.2s ease-out;
+            -moz-transition: opacity 0.2s ease-out;
+            -o-transition: opacity 0.2s ease-out;
+            transition: opacity 0.2s ease-out;
+            opacity: 1;
+        }
+
+        .picture.hidden {
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="touchme">
+        <button class="button" id="toggle">Toggle Picture</button>
+        <div  class="picture hidden">
+            <p>Goldfinch by ibm4381 on Flickr</p>
+            <!--http://www.flickr.com/photos/j_benson/3504443844/-->
+            <a href="1.jpg">
+                <!--http://farm4.staticflickr.com/3597/3504443844_441d538891_z.jpg-->
+                <img src="1.jpg" width="320" height="256" alt="Goldfinch">
+            </a>
+        </div>
+    </div>
+    <script src="tap_event.js"></script>
+    <script>
+        var hidden = true;
+        var h = document.querySelector(".picture");
+
+        function togglePicture(){
+            if(hidden) {
+                h.className = "picture";
+                hidden = false;
+            } else {
+                h.className = "picture hidden";
+                hidden = true;
+            }
+        }
+
+        $('.button').on('tap', function(e) {
+            e.preventDefault();
+            togglePicture();
+            e.target.className = "active button";
+        }).on('tapend', function(e) {
+            e.target.className = "button";
+        });
+    </script>
+</body>
+</html>
