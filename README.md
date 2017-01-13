@@ -1,5 +1,5 @@
 #### three methods of realizing animation
-- pure css technology | @keyframes
+- pure css technology | animation, transition
 - pure js technology | setTimeout / RequestAnimationFrame
 - transition event | event: 'transition', 'transitionend'
 
